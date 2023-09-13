@@ -16,3 +16,48 @@ const slides = [
 		"tagLine":"Autocollants <span>avec découpe laser sur mesure</span>"
 	}
 ]
+
+// ***Variables***
+
+const arrowLeft = document.querySelector(".arrow_left");
+const arrowRight = document.querySelector(".arrow_right");
+const dots = document.querySelector(".dots");
+let banner = document.querySelector(".banner-img");
+let subtitle = document.querySelector("#banner > p");
+let counter = 0;
+let imgLength = slides.length;
+
+for (let i = 0; i < imgLength; i++) {
+dots.innerHTML = dots.innerHTML + "<span class='dot'></span>";
+}
+let dot = document.querySelectorAll(".dot");
+
+banner.src = "./assets/images/slideshow/" + slides[0].image;
+subtitle.innerHTML = slides[0].tagLine;
+dot[0].classList.add("dot_selected");
+
+
+arrowLeft.addEventListener("click", () => {
+dot[counter].classList.remove("dot_selected");
+counter--;
+if (counter === -1) {
+counter = imgLength - 1;
+}
+banner.src = "./assets/images/slideshow/" + slides[counter].image;
+subtitle.innerHTML = slides[counter].tagLine;
+dot[counter].classList.add("dot_selected");
+console.log("Click Left, ", counter);
+});
+
+
+arrowRight.addEventListener("click", () => {
+dot[counter].classList.remove("dot_selected");
+counter++;
+if (counter === imgLength) {
+counter = 0;
+}
+banner.src = "./assets/images/slideshow/" + slides[counter].image;
+subtitle.innerHTML = slides[counter].tagLine;
+dot[counter].classList.add("dot_selected");
+console.log("Click Right, ", counter);
+});
